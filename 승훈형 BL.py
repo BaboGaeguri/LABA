@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from IPython.display import display # Import display from IPython
+from IPython.display import display
 
 np.set_printoptions(precision=6, suppress=True)
 
