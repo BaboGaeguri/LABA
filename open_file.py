@@ -15,6 +15,3 @@ def open_file():
 
     print("CSV 파일을 성공적으로 불러왔습니다.")
     return df
-
-df = open_file()
-print(df.head())
