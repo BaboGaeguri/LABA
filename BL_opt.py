@@ -1,9 +1,10 @@
-from view_불완전 import BlackLittermanMatrixGenerator
-from BL_equation import BL_Parameters
+from view_params import BlackLittermanMatrixGenerator
+from market_params import Market_Params
 
 import numpy as np
 
 def BL_optimization(tau):
+    # view_params
     bl_generator = BlackLittermanMatrixGenerator()
     my_matrices = bl_generator.generate_all_matrices(k_views=5)
     bl_generator.display_matrices(my_matrices)
@@ -11,7 +12,8 @@ def BL_optimization(tau):
     Q = my_matrices['Q']
     omega = my_matrices['Omega']
 
-    BL_parameters = BL_Parameters()
+    # market_params
+    BL_parameters = Market_Params()
     pi = BL_parameters.making_pi()
     sigma = BL_parameters.making_sigma()
     tau=tau

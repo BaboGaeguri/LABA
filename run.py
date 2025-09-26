@@ -13,7 +13,7 @@ forecast_period = [
     "24-12-31"
 ]
 
-# tau 값 설정
+# tau: 시장 불확실성 스칼라 (1*1)
 tau = 0.025
 
 BL_returns = BL_optimization(tau)
