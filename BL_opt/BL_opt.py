@@ -19,7 +19,8 @@ def BL_optimization(tau):
     tau=tau
 
     # Black-Litterman 공식 적용
-    tausigma_inv = np.linalg.inv(tau * sigma)
+    tausigma = tau * sigma
+    tausigma_inv = np.linalg.inv(tausigma)
     omega_inv = np.linalg.inv(omega)
 
     BL_returns = np.linalg.inv(tausigma_inv + P.T @ omega_inv @ P) @ (tausigma_inv @ pi + P.T @ omega_inv @ Q)
@@ -27,4 +28,6 @@ def BL_optimization(tau):
     SECTOR = sigma.columns
     BL_returns_series = pd.Series(BL_returns.values.flatten(), index=SECTOR)
 
-    return BL_returns_series
+    print("BL returns:\n", BL_returns_series)
+
+    return [BL_returns_series, tausigma, SECTOR]
