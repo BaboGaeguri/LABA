@@ -1,4 +1,4 @@
-from BL_opt import BL_optimization
+from BL_opt.BL_opt import BL_optimization
 from MVO_opt_불완전 import MVOOptimizer
 
 # 연구 기간

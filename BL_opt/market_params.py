@@ -17,6 +17,7 @@ class Market_Params:
         self.end_date = '2024-04-30'
 
     # Sigma: 초과수익률 공분산 행렬 (N*N)
+    @classmethod
     def making_sigma(self):
         filtered_df = self.df[(self.df['date'] >= self.start_date) & (self.df['date'] <= self.end_date)].copy()
         pivot_filtered_df = filtered_df.pivot_table(index='date', columns='SECTOR', values='RET_SEC')
@@ -29,14 +30,15 @@ class Market_Params:
         total_mkt_cap = np.sum(mkt_cap)
         w_mkt = mkt_cap / total_mkt_cap
         return w_mkt
-
+    
     def making_delta(self):
         filtered_df = self.df[(self.df['date'] >= self.start_date) & (self.df['date'] <= self.end_date)].copy()
         ret_mean = filtered_df['RET_SEC'].mean()
         ret_variance = filtered_df['RET_SEC'].var()
         delta = ret_mean / ret_variance
         return delta
-
+    
+    @classmethod
     def making_pi(self):
         w_mkt = self.making_w_mkt()
         delta = self.making_delta()

@@ -17,7 +17,7 @@ class BlackLittermanMatrixGenerator:
         n_assets (int): 자산의 개수 (기본값: 9)
         """
         self.n_assets = n_assets
-        
+           
     def generate_view_returns(self, k_views: int, 
                             return_range: Tuple[float, float] = (-0.05, 0.05)) -> np.ndarray:
         """
@@ -31,7 +31,7 @@ class BlackLittermanMatrixGenerator:
         np.ndarray: 견해 수익률 행렬 (K x 1)
         """
         min_return, max_return = return_range
-        Q = np.random.uniform(min_return, max_return, size=(k_views, 1))
+        Q = np.random.uniform(min_return, max_return, size=(int(k_views), 1))
         return Q
     
     def generate_picking_matrix(self, k_views: int, 
@@ -142,6 +142,7 @@ class BlackLittermanMatrixGenerator:
         
         return omega
     
+    @classmethod
     def generate_all_matrices(self, k_views: int,
                             view_type: str = 'mixed',
                             uncertainty_level: str = 'medium',
@@ -177,6 +178,7 @@ class BlackLittermanMatrixGenerator:
             }
         }
     
+    @classmethod
     def display_matrices(self, matrices: dict, precision: int = 4):
         """
         생성된 행렬들을 보기 좋게 출력
@@ -215,7 +217,3 @@ class BlackLittermanMatrixGenerator:
                                columns=[f'View_{i+1}' for i in range(matrices['dimensions']['K'])])
         print(Omega_df.round(precision))
         print()
-
-bl_generator = BlackLittermanMatrixGenerator()
-my_matrices = bl_generator.generate_all_matrices(k_views=5)
-bl_generator.display_matrices(my_matrices)
