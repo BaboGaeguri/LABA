@@ -1,5 +1,5 @@
-from utils.open_file import open_file
-from utils.preprocessing import preprocessing
+from ..utils.open_file import open_file
+from ..utils.preprocessing import preprocessing
 
 import pandas as pd
 import numpy as np

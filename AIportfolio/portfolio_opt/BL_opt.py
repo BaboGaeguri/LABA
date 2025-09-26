@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 
-from .view_params import BlackLittermanMatrixGenerator
-from .market_params import Market_Params
+from .BL_params.view_params import BlackLittermanMatrixGenerator
+from .BL_params.market_params import Market_Params
 def BL_optimization(tau):
     # view_params
     view_params = BlackLittermanMatrixGenerator(n_assets=9)

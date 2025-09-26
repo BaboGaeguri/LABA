@@ -4,7 +4,7 @@ import pandas as pd
 import os
 
 def open_file():
-    folder_name = 'data'
+    folder_name = 'database'
     file_name = 'example.csv'
     file_path = os.path.join(folder_name, file_name)
     df = pd.read_csv(file_path)
