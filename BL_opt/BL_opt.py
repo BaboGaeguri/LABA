@@ -5,15 +5,17 @@ from .view_params import BlackLittermanMatrixGenerator
 from .market_params import Market_Params
 def BL_optimization(tau):
     # view_params
-    my_matrices = BlackLittermanMatrixGenerator.generate_all_matrices(k_views=5)
-    BlackLittermanMatrixGenerator.display_matrices(my_matrices)
+    view_params = BlackLittermanMatrixGenerator(n_assets=9)
+    my_matrices = view_params.generate_all_matrices(k_views=5)
+    view_params.display_matrices(my_matrices)
     P = my_matrices['P']
     Q = my_matrices['Q']
     omega = my_matrices['Omega']
 
     # market_params
-    pi = Market_Params.making_pi()
-    sigma = Market_Params.making_sigma()
+    market_params = Market_Params()
+    pi = market_params.making_pi()
+    sigma = market_params.making_sigma()
     tau=tau
 
     # Black-Litterman 공식 적용
