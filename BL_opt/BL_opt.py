@@ -1,6 +1,7 @@
 from view_params import BlackLittermanMatrixGenerator
 from market_params import Market_Params
 
+import pandas as pd
 import numpy as np
 
 def BL_optimization(tau):
@@ -17,8 +18,14 @@ def BL_optimization(tau):
     pi = BL_parameters.making_pi()
     sigma = BL_parameters.making_sigma()
     tau=tau
+
+    # Black-Litterman 공식 적용
     tausigma_inv = np.linalg.inv(tau * sigma)
     omega_inv = np.linalg.inv(omega)
 
     BL_returns = np.linalg.inv(tausigma_inv + P.T @ omega_inv @ P) @ (tausigma_inv @ pi + P.T @ omega_inv @ Q)
-    return BL_returns
+
+    SECTOR = sigma.columns
+    BL_returns_series = pd.Series(BL_returns.values.flatten(), index=SECTOR)
+
+    return BL_returns_series

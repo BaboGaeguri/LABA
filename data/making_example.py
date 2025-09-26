@@ -15,7 +15,7 @@ except FileNotFoundError:
 except Exception as e:
     print(f"오류가 발생했습니다: {e}")
 
-# example을 위해 11개 티커만 필터링
+# example을 위해 9개 티커만 필터링
 ticker_list = ['NVDA', 'MSFT', 'AAPL', 'GOOGL', 'AMZN', 'META', 'AVGO', 'TSLA', 'LLY']
 filtered_df = df.loc[df['TICKER'].isin(ticker_list)].copy()
 print(filtered_df.head())
