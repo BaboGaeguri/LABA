@@ -27,8 +27,8 @@ def preprocessing(df):
     }).reset_index()
     df_sector.rename(columns={'w_RET': 'RET_SEC'}, inplace=True)
 
-    print("\n최종 데이터프레임 생성 완료")
-    print(f"최종 컬럼: {list(df_sector.columns)}")
+    # print("\n최종 데이터프레임 생성 완료")
+    # print(f"최종 컬럼: {list(df_sector.columns)}")
     
     return df_sector
 

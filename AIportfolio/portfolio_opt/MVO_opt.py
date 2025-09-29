@@ -70,7 +70,7 @@ class MVO_Optimizer:
         )
 
         w_delta_norm = result.x.reshape(-1, 1)
-        print("w_delta_norm:\n", pd.Series(w_delta_norm.flatten(), index=SECTOR).to_string(float_format='{:,.4f}'.format))
+        # print("w_delta_norm:\n", pd.Series(w_delta_norm.flatten(), index=SECTOR).to_string(float_format='{:,.4f}'.format))
         
         return w_delta_norm
 
@@ -104,6 +104,6 @@ class MVO_Optimizer:
         )
         
         w_tan = result.x.reshape(-1, 1)
-        print("w_tan:\n", pd.Series(w_tan.flatten(), index=SECTOR).to_string(float_format='{:,.4f}'.format))
+        # print("w_tan:\n", pd.Series(w_tan.flatten(), index=SECTOR).to_string(float_format='{:,.4f}'.format))
 
         return w_tan
