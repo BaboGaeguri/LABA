@@ -10,3 +10,6 @@
 
 # requirements 설치
 pip install -r requirements.txt
+
+# django 서버 주소
+http://127.0.0.1:8000/
