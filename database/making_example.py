@@ -34,4 +34,4 @@ gics_sectors = {
 }
 filtered_df['SECTOR'] = filtered_df['TICKER'].map(gics_sectors)
 
-filtered_df.to_csv('data/example.csv', index=False)
+filtered_df.to_csv('database/example.csv', index=False)
