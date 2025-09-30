@@ -115,4 +115,4 @@ merged_df["date","Date added", "end_date"] = pd.to_datetime(merged_df["date","Da
 print(merged_df.head())
 
 # 변환된 데이터를 새 엑셀 파일로 저장
-merged_df.to_excel("your_file_converted.xlsx", index=False)
+merged_df.to_excel("database/승훈형 데이터/CRSP_찐막", index=False)
