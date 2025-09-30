@@ -85,7 +85,7 @@ print("필터링 완료.")
 # --- 5. 필터링된 데이터와 S&P 500 데이터 병합 ---
 # `filtered_df`의 'TICKER' 열과 `sp500_df`의 'Symbol' 열을 기준으로 inner join 수행
 print("필터링된 데이터와 S&P 500 데이터를 병합합니다...")
-merged_df = pd.merge(filtered_df, sp500_df, left_on="TICKER", right_on="Symbol", how="inner")
+merged_df = pd.merge(filtered_df, sp500_df, left_on="TICKER", right_on="Symbol", how= "inner")
 print("병합 완료.")
 
 # --- 6. 최종 결과 저장 ---
@@ -105,3 +105,14 @@ print("병합 완료.")
 merged_df.to_csv(final_path, index=False, encoding='utf-8-sig')
 
 print(f"\n모든 작업 완료! 최종 결과 파일이 아래 경로에 저장되었습니다:\n{final_path}")
+
+
+
+# date 컬럼을 datetime 형식으로 변환 후, YYYYMMDD 정수로 변환
+merged_df["date","Date added", "end_date"] = pd.to_datetime(merged_df["date","Date added", "end_date"]).dt.strftime("%Y%m%d").astype(int)
+
+# 변환된 결과 확인
+print(merged_df.head())
+
+# 변환된 데이터를 새 엑셀 파일로 저장
+merged_df.to_excel("your_file_converted.xlsx", index=False)
