@@ -1,6 +1,11 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 class visualization:
+    def __init__(self, portfolio_values, monthly_returns):
+        self.portfolio_values = portfolio_values
+        self.monthly_returns = monthly_returns
+
     def plot_performance(self, benchmark_returns=None, figsize=(15, 10)):
 
         fig, axes = plt.subplots(2, 2, figsize=figsize)

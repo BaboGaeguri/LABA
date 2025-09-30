@@ -12,5 +12,5 @@ def open_file():
     df['date'] = pd.to_datetime(df['date'])
     df['RET'] = pd.to_numeric(df['RET'], errors='coerce')
 
-    print("CSV 파일을 성공적으로 불러왔습니다.")
+    # print("CSV 파일을 성공적으로 불러왔습니다.")
     return df
