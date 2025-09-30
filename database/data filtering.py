@@ -7,6 +7,7 @@ sp500_file_path = r"C:\Users\user\Desktop\github\LABA-1\database\승훈형 데�
 end_file_path = r"C:\Users\user\Desktop\github\LABA-1\database\승훈형 데이터\sp500_ticker_start_end.csv"
 output_path = r"C:\Users\user\Desktop\github\LABA-1\database\승훈형 데이터\merged_sp500.csv" 
 final_path = r"C:\Users\user\Desktop\github\LABA-1\database\승훈형 데이터\merged_final.csv"
+final2_path = r"C:\Users\user\Desktop\github\LABA-1\database\승훈형 데이터\merged_final2.csv"
 # --- 2. 데이터 불러오기 ---
 print("데이터를 불러오는 중입니다...")
 crsp_df = pd.read_csv(crsp_file_path, encoding='cp949')
@@ -107,12 +108,42 @@ merged_df.to_csv(final_path, index=False, encoding='utf-8-sig')
 print(f"\n모든 작업 완료! 최종 결과 파일이 아래 경로에 저장되었습니다:\n{final_path}")
 
 
+cols = ["date", "Date added", "end_date"]
 
-# date 컬럼을 datetime 형식으로 변환 후, YYYYMMDD 정수로 변환
-merged_df["date","Date added", "end_date"] = pd.to_datetime(merged_df["date","Date added", "end_date"]).dt.strftime("%Y%m%d").astype(int)
+def to_yyyymmdd_int(series: pd.Series) -> pd.Series:
+    s = series.copy()
 
-# 변환된 결과 확인
+    # 엑셀 일련번호(대부분 20000~60000 범위)만 있는 컬럼 탐지 후 변환
+    if s.dropna().apply(lambda x: isinstance(x, (int, float))).all():
+        # 숫자인데 엑셀 직렬일 가능성 높은 값만 남겨 체크
+        non_na = s.dropna().astype(float)
+        if not non_na.empty and non_na.between(20000, 60000).mean() > 0.8:
+            dt = pd.to_datetime(s, unit="D", origin="1899-12-30", errors="coerce")
+        else:
+            dt = pd.to_datetime(s, errors="coerce", infer_datetime_format=True)
+    else:
+        dt = pd.to_datetime(s, errors="coerce", infer_datetime_format=True)
+
+    out = dt.dt.strftime("%Y%m%d")
+    out = out.fillna("30000000").astype(int)
+    return out
+
+for c in cols:
+    merged_df[c] = to_yyyymmdd_int(merged_df[c])
+
 print(merged_df.head())
 
-# 변환된 데이터를 새 엑셀 파일로 저장
-merged_df.to_excel("your_file_converted.xlsx", index=False)
+# --- 9. 잘못된 구간 제거 ---
+# date < Date added 이거나 date > end_date 인 행 삭제
+merged_df = merged_df[~((merged_df["date"] < merged_df["Date added"]) | 
+                        (merged_df["date"] > merged_df["end_date"]))]
+
+print("조건에 맞는 행 삭제 완료.")
+print(merged_df.head())
+
+# --- 10. 최종 저장 ---
+merged_df.to_csv(final2_path, index=False, encoding="utf-8-sig")
+print(f"최종 클린 데이터 저장 완료: {final2_path}")
+
+
+
