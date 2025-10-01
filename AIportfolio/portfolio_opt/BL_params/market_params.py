@@ -1,5 +1,4 @@
-from ..utils.open_file import open_file
-from ..utils.preprocessing import preprocessing
+from ..utils.making_ExcessReturn import final
 
 import pandas as pd
 import numpy as np
@@ -12,14 +11,14 @@ import os
 
 class Market_Params:
     def __init__(self, start_date, end_date):
-        self.df = preprocessing(open_file())
+        self.df = final()
         self.start_date = start_date
         self.end_date = end_date
 
     # Sigma: 초과수익률 공분산 행렬 (N*N)
     def making_sigma(self):
         filtered_df = self.df[(self.df['date'] >= self.start_date) & (self.df['date'] <= self.end_date)].copy()
-        pivot_filtered_df = filtered_df.pivot_table(index='date', columns='SECTOR', values='RET_SEC')
+        pivot_filtered_df = filtered_df.pivot_table(index='date', columns='SECTOR', values='ExcessReturn')
         sigma = pivot_filtered_df.cov()
         return sigma
 
@@ -67,8 +66,8 @@ class Market_Params:
         '''
     def making_delta(self):
         filtered_df = self.df[(self.df['date'] >= self.start_date) & (self.df['date'] <= self.end_date)].copy()
-        ret_mean = filtered_df['RET_SEC'].mean()
-        ret_variance = filtered_df['RET_SEC'].var()
+        ret_mean = filtered_df['ExcessReturn'].mean()
+        ret_variance = filtered_df['ExcessReturn'].var()
         delta = ret_mean / ret_variance
         return delta
     
