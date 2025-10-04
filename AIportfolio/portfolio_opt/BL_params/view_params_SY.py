@@ -17,5 +17,3 @@ Utilities vs Financials → 스트레스 낮음+금리부담: Financials 우위.
 # omega: 견해 불확실성 공분산 행렬 (K*K)
 # Q: 투자자 견해 초과수익률 벡텨 (K*1)
 
-a = BL_optimization(tau=0.05, start_date='2021-05-31', end_date='2024-04-30')
-print(a)

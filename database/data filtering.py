@@ -141,5 +141,8 @@ merged_df = merged_df[~((merged_df["date"] < merged_df["Date added"]) |
 print("조건에 맞는 행 삭제 완료.")
 print(merged_df.head())
 
-# 변환된 데이터를 새 엑셀 파일로 저장
-merged_df.to_excel("your_file_converted.xlsx", index=False)
+# --- 10. 최종 저장 ---
+merged_df.to_csv(final2_path, index=False, encoding="utf-8-sig")
+print(f"최종 클린 데이터 저장 완료: {final2_path}")
+
+
