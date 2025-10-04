@@ -1,8 +1,8 @@
-from ..utils.making_ExcessReturn import final
-
 import pandas as pd
 import numpy as np
 import os
+
+from ..utils.making_ExcessReturn import final
 
 # N: 자산 개수
 # K: 견해 개수
@@ -24,17 +24,6 @@ class Market_Params:
 
     # Pi: 내재 시장 균형 초과수익률 벡터 (N*1)
     def making_w_mkt(self):
-        """
-        주어진 종료일(end_date)이 속한 월의 가장 마지막 영업일 데이터를 찾아
-        시장 가중치를 계산합니다.
-        
-        Args:
-            df (pd.DataFrame): 전체 데이터프레임
-            end_date (datetime): 훈련 기간의 종료일 (예: 2024-06-30)
-        
-        Returns:
-            np.array: 시장 가중치
-        """
         # 훈련 기간의 종료일이 속한 월을 기준으로 데이터를 필터링
         # 'YYYY-MM' 형식으로 변환하여 해당 월의 모든 데이터를 가져옴
         end_month = self.end_date.strftime('%Y-%m')
@@ -58,12 +47,7 @@ class Market_Params:
         w_mkt = mkt_cap / total_mkt_cap
         
         return w_mkt
-        '''
-        mkt_cap = self.df[self.df['date'] == self.end_date]['MKT_SEC'].values.reshape(-1, 1)
-        total_mkt_cap = np.sum(mkt_cap)
-        w_mkt = mkt_cap / total_mkt_cap
-        return w_mkt
-        '''
+
     def making_delta(self):
         filtered_df = self.df[(self.df['date'] >= self.start_date) & (self.df['date'] <= self.end_date)].copy()
         ret_mean = filtered_df['ExcessReturn'].mean()
